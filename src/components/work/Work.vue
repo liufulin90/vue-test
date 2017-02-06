@@ -1,18 +1,28 @@
 <template>
   <div>
-asdf
+    <div v-for="item in this.$store.state.workList">
+      {{item.describe}}
+    </div>
+    <div v-for="item in this.$store.state.projectList">
+      {{item.tech}}
+    </div>
   </div>
 </template>
 
 <script>
-  console.log(123)
-  /*
-   import WorkService from 'services/WorkService'
-   WorkService.getWorkExperience().then(data => {
-   console.log(data.data)
-   })
-   WorkService.getProjectExperience().then(data => {
-   console.log(data.data)
-   })
-   */
+  import WorkService from 'services/WorkService'
+
+  export default {
+    name: 'work',
+    data () {
+      WorkService.getWorkExperience().then(data => {
+        this.$store.state.workList = data.data
+      })
+      WorkService.getProjectExperience().then(data => {
+        this.$store.state.projectList = data.data
+      })
+      return {}
+    }
+  }
+
 </script>
