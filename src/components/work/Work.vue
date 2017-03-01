@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="item in this.$store.state.workList">
+    <div v-for="item in workList">
       {{item.describe}}
     </div>
     <div v-for="item in this.$store.state.projectList">
@@ -13,15 +13,22 @@
   import WorkService from 'services/WorkService'
   export default {
     name: 'work',
-    data () {
+    beforeCreate () {
+    },
+    beforeMount () {
       WorkService.getWorkExperience().then(data => {
         this.$store.state.workList = data.data
       })
       WorkService.getProjectExperience().then(data => {
         this.$store.state.projectList = data.data
       })
+    },
+    data () {
       console.log(this.$store.state)
-      return {}
+      return {
+        workList: this.$store.state.workList,
+        projectList: this.$store.state.projectList
+      }
     }
   }
 
