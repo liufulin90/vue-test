@@ -1,6 +1,16 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <div>Enter content: {{ inputData }}</div>
+    <ul>
+      <li v-for="d in inputList">
+        {{d}}
+      </li>
+    </ul>
+    <input v-model="inputData">
+    <div>
+      <button v-on="onClick">Submit</button>
+    </div>
   </div>
 </template>
 
@@ -8,9 +18,15 @@
   export default {
     name: 'map',
     data () {
+      let {inputData, inputList} = this.$store.state
+      console.log(inputList)
       return {
-        msg: 'This page is map page'
+        msg: 'This page is map page',
+        inputData: inputData
       }
+    },
+    watch: {
+
     }
   }
 </script>

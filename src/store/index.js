@@ -1,3 +1,4 @@
+// 我们组装模块并导出 store 的地方
 import Vuex from 'vuex'
 import Vue from 'vue'
 import {myPlugin} from './plugins'

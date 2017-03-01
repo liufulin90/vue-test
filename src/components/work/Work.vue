@@ -11,7 +11,6 @@
 
 <script>
   import WorkService from 'services/WorkService'
-
   export default {
     name: 'work',
     data () {
@@ -21,6 +20,7 @@
       WorkService.getProjectExperience().then(data => {
         this.$store.state.projectList = data.data
       })
+      console.log(this.$store.state)
       return {}
     }
   }
