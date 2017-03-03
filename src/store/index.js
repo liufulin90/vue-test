@@ -6,8 +6,17 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    count: 0,
-    workList: []
+    menu: {
+      defaultActive: 1
+    },
+    workPage: {
+      workList: [],
+      projectList: []
+    },
+    mapPage: {
+      isOk: true,
+      inputData: ''
+    }
   },
   mutations: {
     increment (state) {

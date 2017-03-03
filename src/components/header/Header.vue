@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <el-menu theme="dark" default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+    <el-menu theme="dark" default-active={defaultActive} class="el-menu-demo" mode="horizontal" @select="handleSelect">
       <el-menu-item index="1">
         <router-link to="/">Home</router-link>
       </el-menu-item>
@@ -33,8 +33,10 @@
 <script>
   export default {
     data () {
+      console.log(this.$store.state.menu.defaultActive)
       return {
-        theme1: 'dark'
+        theme1: 'dark',
+        defaultActive: this.$store.state.menu.defaultActive
       }
     },
     methods: {

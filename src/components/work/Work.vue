@@ -3,7 +3,7 @@
     <div v-for="item in workList">
       {{item.describe}}
     </div>
-    <div v-for="item in this.$store.state.projectList">
+    <div v-for="item in projectList">
       {{item.tech}}
     </div>
   </div>
@@ -17,17 +17,19 @@
     },
     beforeMount () {
       WorkService.getWorkExperience().then(data => {
-        this.$store.state.workList = data.data
+        this.workList = data.data
       })
       WorkService.getProjectExperience().then(data => {
-        this.$store.state.projectList = data.data
+        this.projectList = data.data
       })
+    },
+    beforeUpdate () {
     },
     data () {
       console.log(this.$store.state)
       return {
-        workList: this.$store.state.workList,
-        projectList: this.$store.state.projectList
+        workList: [],
+        projectList: []
       }
     }
   }

@@ -3,31 +3,67 @@
     <h1>{{ msg }}</h1>
     <div>Enter content: {{ inputData }}</div>
     <ul>
-      <li v-for="d in inputList">
-        {{d}}
-      </li>
+
     </ul>
     <input v-model="inputData">
     <div>
-      <button v-on="onClick">Submit</button>
+      <button @click="onClick">Submit</button>
     </div>
+    <transition>
+      <div v-if="isOk">toggled content</div>
+    </transition>
   </div>
 </template>
 
 <script>
   export default {
     name: 'map',
+    beforeCreate () {
+      console.log('breforeCreate')
+    },
+    created () {
+      console.log('created')
+    },
+    beforeMount () {
+      console.log('beforeMount')
+    },
+    mounted () {
+      console.log('mounted')
+    },
+    beforeUpdate () {
+      console.log('berforeUpdate')
+    },
+    updated () {
+      this.$store.state.mapPage.inputData = this.inputData
+      console.log('updated')
+    },
+    activated () {
+      console.log('activated')
+    },
+    deactivated () {
+      console.log('deactived')
+    },
+    beforeDestroy () {
+      console.log('beforeDestroy')
+    },
+    destroyed () {
+      console.log('destroyed')
+    },
     data () {
-      let {inputData, inputList} = this.$store.state
-      console.log(inputList)
+      let {mapPage} = this.$store.state
       return {
         msg: 'This page is map page',
-        inputData: inputData
+        inputData: mapPage.inputData,
+        isOk: mapPage.isOk
       }
     },
-    watch: {
-
-    }
+    methods: {
+      onClick () {
+        this.$data.isOk = !this.$data.isOk
+        this.$store.state.mapPage.isOk = this.isOk
+      }
+    },
+    watch: {}
   }
 </script>
 
