@@ -28,13 +28,16 @@
       console.log('beforeMount')
     },
     mounted () {
+      console.log(this.$store.state.count)
       console.log('mounted')
     },
     beforeUpdate () {
       console.log('berforeUpdate')
     },
     updated () {
+      this.$store.dispatch('incrementAction', {count: 1})
       this.$store.state.mapPage.inputData = this.inputData
+      console.log('updated count:', this.$store.state.count)
       console.log('updated')
     },
     activated () {
@@ -47,6 +50,7 @@
       console.log('beforeDestroy')
     },
     destroyed () {
+      console.log(this.$store.state.count)
       console.log('destroyed')
     },
     data () {
@@ -59,8 +63,11 @@
     },
     methods: {
       onClick () {
-        this.$data.isOk = !this.$data.isOk
-        this.$store.state.mapPage.isOk = this.isOk
+//        this.$data.isOk = !this.$data.isOk
+//        this.$store.state.mapPage.isOk = this.isOk
+        this.$store.dispatch('changeViewAction')
+        console.log('######')
+        this.$data.isOk = this.$store.state.mapPage.isOk
       }
     },
     watch: {}
