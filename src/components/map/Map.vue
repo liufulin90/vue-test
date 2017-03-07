@@ -5,12 +5,17 @@
     <ul>
 
     </ul>
-    <input v-model="inputData">
-    <div>
-      <button @click="onClick">Submit</button>
+    <el-input v-model="inputData"></el-input>
+    <div style="margin: 15px 0;">
+      <el-button @click="onClick">toggled</el-button>
     </div>
     <transition>
-      <div v-if="isOk">toggled content</div>
+      <div v-if="isOk">
+        toggled content<br>
+        <el-badge value="99+" class="item">
+          <el-button size="small">评论</el-button>
+        </el-badge>
+      </div>
     </transition>
   </div>
 </template>
@@ -63,11 +68,32 @@
     },
     methods: {
       onClick () {
-//        this.$data.isOk = !this.$data.isOk
-//        this.$store.state.mapPage.isOk = this.isOk
         this.$store.dispatch('changeViewAction')
         console.log('######')
         this.$data.isOk = this.$store.state.mapPage.isOk
+        const sleep = (timeout = 1000) => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve()
+            }, timeout)
+          })
+        }
+        const func = () => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(123)
+            }, 1000)
+          })
+        }
+        const testAsync = async () => {
+          let f1 = await func()
+          console.log('f1', f1)
+          let f2 = await func()
+          console.log('f2', f2)
+          await sleep(2000)
+          console.log(222)
+        }
+        testAsync()
       }
     },
     watch: {}
