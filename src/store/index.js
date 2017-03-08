@@ -14,7 +14,8 @@ const store = new Vuex.Store({
     },
     workPage: {
       workList: [],
-      projectList: []
+      projectList: [],
+      isListShow: false
     },
     mapPage: {
       isOk: true,

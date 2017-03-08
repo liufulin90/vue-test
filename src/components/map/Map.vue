@@ -11,7 +11,6 @@
     </div>
     <transition>
       <div v-if="isOk">
-        toggled content<br>
         <el-badge value="99+" class="item">
           <el-button size="small">评论</el-button>
         </el-badge>
@@ -69,7 +68,6 @@
     methods: {
       onClick () {
         this.$store.dispatch('changeViewAction')
-        console.log('######')
         this.$data.isOk = this.$store.state.mapPage.isOk
         const sleep = (timeout = 1000) => {
           return new Promise((resolve, reject) => {

@@ -1,3 +1,5 @@
+import {defaultProps, oneOfType, oneOf, any} from './props'
+import {guid} from './guid'
 /**
  * const testAsync = async () => {
  *   console.log(1)
@@ -17,5 +19,8 @@ const sleep = (timeout = 1000) => {
 }
 
 export {
-  sleep
+  sleep,
+  defaultProps, oneOfType, oneOf, any,
+  guid
 }
+

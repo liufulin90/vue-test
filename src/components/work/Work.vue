@@ -1,28 +1,53 @@
 <template>
   <div>
-    <div v-for="item in workList">
-      {{item.describe}}
+    <div style="width: 1000px;margin: 0 auto;">
+      <br><br>
+      <el-button @click="toggleList">show</el-button>
+      <br><br>
+      <div v-if="isListShow">
+        <lin-timeline>
+          <div v-for="(item, index) in workList">
+            <lin-timeline-item v-if="item.isPrimary" color='#f00'>
+              <p>{{item.timeSlot}}</p>
+              <p>{{item.companyName}}</p>
+              <p>{{item.job}}</p>
+              <p>{{item.describe}}</p>
+            </lin-timeline-item>
+            <lin-timeline-item v-else>
+              <p>{{item.timeSlot}}</p>
+              <p>{{item.companyName}}</p>
+              <p>{{item.job}}</p>
+              <p>{{item.describe}}</p>
+            </lin-timeline-item>
+          </div>
+        </lin-timeline>
+        <br><br>
+        <lin-timeline>
+          <div v-for="(item, index) in projectList">
+            <lin-timeline-item v-if="item.isPrimary" color='#f00'>
+              <p>{{item.timeAndName}}</p>
+              <p>{{item.env}}</p>
+              <p>{{item.tech}}</p>
+              <p>{{item.projectDes}}</p>
+              <p>{{item.jobDes}}</p>
+            </lin-timeline-item>
+            <lin-timeline-item v-else>
+              <p>{{item.timeAndName}}</p>
+              <p>{{item.env}}</p>
+              <p>{{item.tech}}</p>
+              <p>{{item.projectDes}}</p>
+              <p>{{item.jobDes}}</p>
+            </lin-timeline-item>
+          </div>
+        </lin-timeline>
+      </div>
     </div>
-    <div v-for="item in projectList">
-      {{item.tech}}
-    </div>
-
-    <el-button>asdf</el-button>
-
-    <el-timeline icon="setting">
-      <el-timeline-item>this is my timeline111</el-timeline-item>
-      <el-timeline-item>this is my timeline222</el-timeline-item>
-    </el-timeline>
 
   </div>
 </template>
 
 <script>
   import WorkService from 'services/WorkService'
-  import Vue from 'vue'
-  import elTimeline from '../timeline/'
-//  Timeline.install(Vue)
-  Vue.use(elTimeline)
   export default {
     name: 'work',
     beforeCreate () {
@@ -38,10 +63,16 @@
     beforeUpdate () {
     },
     data () {
-      console.log(this.$store.state)
+      let {isListShow, workList, projectList} = this.$store.state.workPage
       return {
-        workList: [],
-        projectList: []
+        workList: workList,
+        projectList: projectList,
+        isListShow: isListShow
+      }
+    },
+    methods: {
+      toggleList () {
+        this.$data.isListShow = this.$store.state.workPage.isListShow = !this.$data.isListShow
       }
     }
   }
