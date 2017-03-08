@@ -10,10 +10,15 @@
       <el-button @click="onClick">toggled</el-button>
     </div>
     <transition>
-      <div v-if="isOk">
-        <el-badge value="99+" class="item">
+      <div v-if="isOk" style="width: 1000px;margin: 0 auto">
+        <el-badge :value="commentCount" class="item">
           <el-button size="small">评论</el-button>
         </el-badge>
+        <el-row>
+          <el-col :span="24"><div class="grid-content bg-purple-dark">
+            <el-slider v-model="sliderValue1"></el-slider>
+          </div></el-col>
+        </el-row>
       </div>
     </transition>
   </div>
@@ -41,8 +46,7 @@
     updated () {
       this.$store.dispatch('incrementAction', {count: 1})
       this.$store.state.mapPage.inputData = this.inputData
-      console.log('updated count:', this.$store.state.count)
-      console.log('updated')
+      console.log('updated', this.$data.sliderValue1)
     },
     activated () {
       console.log('activated')
@@ -62,7 +66,9 @@
       return {
         msg: 'This page is map page',
         inputData: mapPage.inputData,
-        isOk: mapPage.isOk
+        isOk: mapPage.isOk,
+        sliderValue1: 16,
+        commentCount: 88
       }
     },
     methods: {

@@ -7,13 +7,7 @@
       <div v-if="isListShow">
         <lin-timeline>
           <div v-for="(item, index) in workList">
-            <lin-timeline-item v-if="item.isPrimary" color='#f00'>
-              <p>{{item.timeSlot}}</p>
-              <p>{{item.companyName}}</p>
-              <p>{{item.job}}</p>
-              <p>{{item.describe}}</p>
-            </lin-timeline-item>
-            <lin-timeline-item v-else>
+            <lin-timeline-item :color="item.isPrimary ? '#f00' : ''" :last="index == workList.length-1 ? true : false">
               <p>{{item.timeSlot}}</p>
               <p>{{item.companyName}}</p>
               <p>{{item.job}}</p>
@@ -24,14 +18,7 @@
         <br><br>
         <lin-timeline>
           <div v-for="(item, index) in projectList">
-            <lin-timeline-item v-if="item.isPrimary" color='#f00'>
-              <p>{{item.timeAndName}}</p>
-              <p>{{item.env}}</p>
-              <p>{{item.tech}}</p>
-              <p>{{item.projectDes}}</p>
-              <p>{{item.jobDes}}</p>
-            </lin-timeline-item>
-            <lin-timeline-item v-else>
+            <lin-timeline-item :color="item.isPrimary ? '#f00' : ''" :last="index == projectList.length-1 ? true : false">
               <p>{{item.timeAndName}}</p>
               <p>{{item.env}}</p>
               <p>{{item.tech}}</p>
@@ -64,6 +51,7 @@
     },
     data () {
       let {isListShow, workList, projectList} = this.$store.state.workPage
+      isListShow = true
       return {
         workList: workList,
         projectList: projectList,

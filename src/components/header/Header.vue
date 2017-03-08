@@ -33,7 +33,6 @@
 <script>
   export default {
     data () {
-      console.log(this.$store.state.menu.defaultActive)
       return {
         theme1: 'dark',
         defaultActive: this.$store.state.menu.defaultActive
@@ -41,7 +40,7 @@
     },
     methods: {
       handleSelect (key, keyPath) {
-        console.log(key, keyPath)
+//        console.log(key, keyPath)
       }
     }
   }
