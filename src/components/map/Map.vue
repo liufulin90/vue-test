@@ -2,9 +2,6 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <div>Enter content: {{ inputData }}</div>
-    <ul>
-
-    </ul>
     <el-input v-model="inputData"></el-input>
     <div style="margin: 15px 0;">
       <el-button @click="onClick">toggled</el-button>
@@ -27,13 +24,14 @@
           </el-col>
 
           <el-col>
-            <el-input v-model="keyboardEnterValue"></el-input>
+            <el-input v-model="keyboardEnterValue" @focus="inputFocus"></el-input>
+            <div class="el-input__inner" @click="inputFocus" type="number">{{keyboardEnterValue}}</div>
+            <div class="el-input__inner" @click="inputFocus">{{keyboardEnterValue}}</div>
+            <br>
           </el-col>
 
           <el-col :span="24">
-            <div>
-              <lin-keyboard-char :value="keyboardEnterValue" @onKeyboardChange='onKeyboardChange'></lin-keyboard-char>
-            </div>
+            <lin-keyboard :value="keyboardEnterValue" :show="showKeyboard" :type="keyboardType" @onKeyboardChange='onKeyboardChange'></lin-keyboard>
           </el-col>
 
         </el-row>
@@ -52,42 +50,35 @@
         inputData: mapPage.inputData,
         isOk: mapPage.isOk,
         commentCount: mapPage.formData.commentCount,
-        keyboardEnterValue: '@'
+        keyboardEnterValue: '',
+        showKeyboard: false,
+        keyboardType: 'char'
       }
     },
     methods: {
-      onKeyboardChange (msg) {
-        this.keyboardEnterValue = msg
+      onKeyboardChange (val, isShow, type) {
+        this.keyboardEnterValue = val
+        this.showKeyboard = isShow
+        this.keyboardType = type
+      },
+      inputFocus (e) {
+        this.showKeyboard = true
+        if (!e.originalTarget.attributes.type) {
+          this.keyboardType = null
+        } else if (e.originalTarget.attributes.type && e.originalTarget.attributes.type.nodeValue === 'number') {
+          this.keyboardType = 'number'
+        } else {
+          this.keyboardType = 'char'
+        }
+        console.log('e.originalTarget.attributes.type', e.originalTarget.attributes.type)
+        this.$forceUpdate()
       },
       onClick () {
         this.$store.dispatch('changeViewAction')
         this.$data.isOk = this.$store.state.mapPage.isOk
-        const sleep = (timeout = 1000) => {
-          return new Promise((resolve, reject) => {
-            setTimeout(() => {
-              resolve()
-            }, timeout)
-          })
-        }
-        const func = () => {
-          return new Promise((resolve, reject) => {
-            setTimeout(() => {
-              resolve(123)
-            }, 1000)
-          })
-        }
-        const testAsync = async () => {
-          let f1 = await func()
-          console.log('f1', f1)
-          let f2 = await func()
-          console.log('f2', f2)
-          await sleep(2000)
-          console.log(222)
-        }
-        testAsync()
       },
       commitData () {
-
+        console.log(this)
       }
     },
     beforeCreate () {
@@ -100,7 +91,6 @@
 //      console.log('beforeMount')
     },
     mounted () {
-      console.log(this.$store.state.count)
 //      console.log('mounted')
     },
     beforeUpdate () {
@@ -110,7 +100,6 @@
       this.$store.dispatch('incrementAction', {count: 1})
       this.$store.state.mapPage.inputData = this.inputData
       this.$store.state.mapPage.formData.commentCount = this.$data.commentCount
-//      console.log('updated', this.$data.keyboardEnterValue)
     },
     activated () {
 //      console.log('activated')

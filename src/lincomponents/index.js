@@ -2,13 +2,12 @@
  * 导入所有组件
  */
 import linTimeline from './timeline/'
-import {linKeyboardChar, linKeyboardNumber} from './keyboard/'
+import {linKeyboard} from './keyboard/'
 
 let components = {
   linTimeline,
   linTimelineItem: linTimeline.Item,
-  linKeyboardChar,
-  linKeyboardNumber
+  linKeyboard
 }
 
 /**
