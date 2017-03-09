@@ -1,13 +1,14 @@
 // 我们组装模块并导出 store 的地方
 import Vuex from 'vuex'
 import Vue from 'vue'
-import * as actions from './actions'
-import * as mutations from './mutations'
+import _actions from './actions'
+import _mutations from './mutations'
 import {myPlugin} from './plugins'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    keyboardEnterValue: '',
     count: 1,
     menu: {
       defaultActive: 1
@@ -26,18 +27,10 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    // incrementMt (state, payload) {
-    //   console.log('mutations @@')
-    //   state.count += payload.count
-    // }
-    ...mutations
+    ..._mutations
   },
   actions: {
-    // incrementAction (context, payload) {
-    //   console.log('action @@', context)
-    //   context.commit('incrementMt', payload)
-    // }
-    ...actions
+    ..._actions
   },
   modules: {
     // key: {}

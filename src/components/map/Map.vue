@@ -11,7 +11,6 @@
     </div>
     <transition>
       <div v-if="isOk" style="width: 1000px;margin: 0 auto">
-
         <el-row>
           <el-col :span="12">
             <div class="grid-content bg-purple-dark">
@@ -26,6 +25,17 @@
           <el-col :span="6">
             <el-button size="small" @click="commitData">submit</el-button>
           </el-col>
+
+          <el-col>
+            <el-input v-model="keyboardEnterValue"></el-input>
+          </el-col>
+
+          <el-col :span="24">
+            <div>
+              <lin-keyboard-char :value="keyboardEnterValue" @onKeyboardChange='onKeyboardChange'></lin-keyboard-char>
+            </div>
+          </el-col>
+
         </el-row>
       </div>
     </transition>
@@ -35,51 +45,20 @@
 <script>
   export default {
     name: 'map',
-    beforeCreate () {
-      console.log('breforeCreate')
-    },
-    created () {
-      console.log('created')
-    },
-    beforeMount () {
-      console.log('beforeMount')
-    },
-    mounted () {
-      console.log(this.$store.state.count)
-      console.log('mounted')
-    },
-    beforeUpdate () {
-      console.log('berforeUpdate')
-    },
-    updated () {
-      this.$store.dispatch('incrementAction', {count: 1})
-      this.$store.state.mapPage.inputData = this.inputData
-      this.$store.state.mapPage.formData.commentCount = this.$data.commentCount
-      console.log('updated', this.$data.commentCount)
-    },
-    activated () {
-      console.log('activated')
-    },
-    deactivated () {
-      console.log('deactived')
-    },
-    beforeDestroy () {
-      console.log('beforeDestroy')
-    },
-    destroyed () {
-      console.log(this.$store.state.count)
-      console.log('destroyed')
-    },
     data () {
       let {mapPage} = this.$store.state
       return {
         msg: 'This page is map page',
         inputData: mapPage.inputData,
         isOk: mapPage.isOk,
-        commentCount: mapPage.formData.commentCount
+        commentCount: mapPage.formData.commentCount,
+        keyboardEnterValue: '@'
       }
     },
     methods: {
+      onKeyboardChange (msg) {
+        this.keyboardEnterValue = msg
+      },
       onClick () {
         this.$store.dispatch('changeViewAction')
         this.$data.isOk = this.$store.state.mapPage.isOk
@@ -111,7 +90,40 @@
 
       }
     },
-    watch: {}
+    beforeCreate () {
+//      console.log('breforeCreate')
+    },
+    created () {
+//      console.log('created')
+    },
+    beforeMount () {
+//      console.log('beforeMount')
+    },
+    mounted () {
+      console.log(this.$store.state.count)
+//      console.log('mounted')
+    },
+    beforeUpdate () {
+//      console.log('berforeUpdate')
+    },
+    updated () {
+      this.$store.dispatch('incrementAction', {count: 1})
+      this.$store.state.mapPage.inputData = this.inputData
+      this.$store.state.mapPage.formData.commentCount = this.$data.commentCount
+//      console.log('updated', this.$data.keyboardEnterValue)
+    },
+    activated () {
+//      console.log('activated')
+    },
+    deactivated () {
+//      console.log('deactived')
+    },
+    beforeDestroy () {
+//      console.log('beforeDestroy')
+    },
+    destroyed () {
+//      console.log('destroyed')
+    }
   }
 </script>
 
