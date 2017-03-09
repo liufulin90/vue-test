@@ -51,7 +51,6 @@
     },
     data () {
       let {isListShow, workList, projectList} = this.$store.state.workPage
-      isListShow = true
       return {
         workList: workList,
         projectList: projectList,

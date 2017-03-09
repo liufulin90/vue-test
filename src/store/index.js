@@ -19,7 +19,10 @@ const store = new Vuex.Store({
     },
     mapPage: {
       isOk: true,
-      inputData: ''
+      inputData: '',
+      formData: {
+        commentCount: 10
+      }
     }
   },
   mutations: {

@@ -11,13 +11,21 @@
     </div>
     <transition>
       <div v-if="isOk" style="width: 1000px;margin: 0 auto">
-        <el-badge :value="commentCount" class="item">
-          <el-button size="small">评论</el-button>
-        </el-badge>
+
         <el-row>
-          <el-col :span="24"><div class="grid-content bg-purple-dark">
-            <el-slider v-model="sliderValue1"></el-slider>
-          </div></el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple-dark">
+              <el-slider v-model="commentCount"></el-slider>
+            </div>
+          </el-col>
+          <el-col :span="6">
+            <el-badge :value="commentCount > 99 ? '99+' : commentCount" class="item">
+              <el-button size="small">评论</el-button>
+            </el-badge>
+          </el-col>
+          <el-col :span="6">
+            <el-button size="small" @click="commitData">submit</el-button>
+          </el-col>
         </el-row>
       </div>
     </transition>
@@ -46,7 +54,8 @@
     updated () {
       this.$store.dispatch('incrementAction', {count: 1})
       this.$store.state.mapPage.inputData = this.inputData
-      console.log('updated', this.$data.sliderValue1)
+      this.$store.state.mapPage.formData.commentCount = this.$data.commentCount
+      console.log('updated', this.$data.commentCount)
     },
     activated () {
       console.log('activated')
@@ -67,8 +76,7 @@
         msg: 'This page is map page',
         inputData: mapPage.inputData,
         isOk: mapPage.isOk,
-        sliderValue1: 16,
-        commentCount: 88
+        commentCount: mapPage.formData.commentCount
       }
     },
     methods: {
@@ -98,6 +106,9 @@
           console.log(222)
         }
         testAsync()
+      },
+      commitData () {
+
       }
     },
     watch: {}
