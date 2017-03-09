@@ -63,14 +63,14 @@
       },
       inputFocus (e) {
         this.showKeyboard = true
-        if (!e.originalTarget.attributes.type) {
+        let target = e.originalTarget || e.target
+        if (!target.attributes.type) {
           this.keyboardType = null
-        } else if (e.originalTarget.attributes.type && e.originalTarget.attributes.type.nodeValue === 'number') {
+        } else if (target.attributes.type && target.attributes.type.nodeValue === 'number') {
           this.keyboardType = 'number'
         } else {
           this.keyboardType = 'char'
         }
-        console.log('e.originalTarget.attributes.type', e.originalTarget.attributes.type)
         this.$forceUpdate()
       },
       onClick () {

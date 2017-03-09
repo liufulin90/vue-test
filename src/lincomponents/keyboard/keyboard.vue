@@ -37,7 +37,7 @@
           <span class="kb-char-middle" :class="value ? '' : 'kb-char-disabled'" @click="delChar">del</span>
         </li>
         <li class="kb-char-item">
-          <span class="kb-char-large" @click="changeKeyboard">.?123</span>
+          <span class="kb-char-large" :class="isOnlyOneKeyboard ? 'kb-char-disabled' : ''" @click="changeKeyboard">.?123</span>
           <span class="kb-char-large" :class="value ? '' : 'kb-char-disabled'" @click="clearChar">clear</span>
           <span class="kb-char-space" @click="enterChar($event, '')">space</span>
           <span class="kb-char-large" @click="closeKeyboard">{{value ? 'OK' : 'CLOSE'}}</span>
@@ -62,7 +62,7 @@
           <span @click="enterChar">7</span>
           <span @click="enterChar">8</span>
           <span @click="enterChar">9</span>
-          <span class="kb-char-large" @click="changeKeyboard">ABC</span>
+          <span class="kb-char-large" :class="isOnlyOneKeyboard ? 'kb-char-disabled' : ''" @click="changeKeyboard">ABC</span>
         </li>
         <li class="kb-char-item">
           <span @click="enterChar">.</span>
@@ -131,8 +131,10 @@
        */
       _judgeKeyboardType () {
         if (!this._judgeOnlyOneKeyboard()) {
+          this.isOnlyOneKeyboard = false
           return this.isCharKeyboard
         } else {
+          this.isOnlyOneKeyboard = true
           if (this.type === 'number') {
             return false
           } else {
@@ -152,10 +154,11 @@
        * @param val
        */
       enterChar (e, val) {
+        let target = e.originalTarget || e.target
         if (val === '') {
           this.value = this.value + ' '
         } else {
-          this.value = this.value + e.originalTarget.innerText
+          this.value = this.value + target.innerText
         }
       },
       /**
@@ -175,11 +178,14 @@
         this.value = ''
       },
       /**
-       * 字母和数字键盘切换
+       * 字母和数字键盘切换,如果仅仅是数字或字符则不可切换
        */
       changeKeyboard () {
         if (!this._judgeOnlyOneKeyboard()) {
           this.isCharKeyboard = !this.isCharKeyboard
+          this.isOnlyOneKeyboard = false
+        } else {
+          this.isOnlyOneKeyboard = true
         }
       },
       /**
