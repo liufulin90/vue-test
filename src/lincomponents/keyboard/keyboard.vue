@@ -82,7 +82,7 @@
     props: defaultProps({
       value: '',
       show: false,
-      type: null,
+      keyType: null, // number, char
       onKeyboardChange () {},
       initKeyboard () {}
     }),
@@ -108,19 +108,19 @@
       show () {
         this._watchProps()
       },
-      type () {
+      keyType () {
         this._watchProps()
       }
     },
     methods: {
       _watchProps () {
-        this.$emit('onKeyboardChange', this.value, this.show, this.type)
+        this.$emit('onKeyboardChange', this.value, this.show, this.keyType)
       },
       /**
-       * 判断是否可以切换键盘，true不可切换，false可切换
+       * 判断是否可以切换键盘，true不可切换，false可切换。不设定类型则默认可以切换键盘
        */
       _judgeOnlyOneKeyboard () {
-        if (this.type === null) {
+        if (this.keyType === null) {
           return false
         } else {
           return true
@@ -135,7 +135,7 @@
           return this.isCharKeyboard
         } else {
           this.isOnlyOneKeyboard = true
-          if (this.type === 'number') {
+          if (this.keyType === 'number') {
             return false
           } else {
             return true

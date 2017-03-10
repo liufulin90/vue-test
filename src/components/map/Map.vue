@@ -25,13 +25,13 @@
 
           <el-col>
             <el-input v-model="keyboardEnterValue" @focus="inputFocus"></el-input>
-            <div class="el-input__inner" @click="inputFocus" type="number">{{keyboardEnterValue}}</div>
+            <div class="el-input__inner" @click="inputFocus" keyType="number">{{keyboardEnterValue}}</div>
             <div class="el-input__inner" @click="inputFocus">{{keyboardEnterValue}}</div>
             <br>
           </el-col>
 
           <el-col :span="24">
-            <lin-keyboard :value="keyboardEnterValue" :show="showKeyboard" :type="keyboardType" @onKeyboardChange='onKeyboardChange'></lin-keyboard>
+            <lin-keyboard :value="keyboardEnterValue" :show="showKeyboard" :keyType="keyboardType" @onKeyboardChange='onKeyboardChange'></lin-keyboard>
           </el-col>
 
         </el-row>
@@ -64,9 +64,9 @@
       inputFocus (e) {
         this.showKeyboard = true
         let target = e.originalTarget || e.target
-        if (!target.attributes.type) {
+        if (!target.attributes.keyType) {
           this.keyboardType = null
-        } else if (target.attributes.type && target.attributes.type.nodeValue === 'number') {
+        } else if (target.attributes.keyType && target.attributes.keyType.nodeValue === 'number') {
           this.keyboardType = 'number'
         } else {
           this.keyboardType = 'char'
