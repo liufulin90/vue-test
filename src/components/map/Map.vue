@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello"  style="width: 1000px;margin: 0 auto">
     <h1>{{ msg }}</h1>
     <div>Enter content: {{ inputData }}</div>
     <el-input v-model="inputData"></el-input>
@@ -7,7 +7,7 @@
       <el-button @click="onClick">toggled</el-button>
     </div>
     <transition>
-      <div v-if="isOk" style="width: 1000px;margin: 0 auto">
+      <div v-if="isOk">
         <el-row>
           <el-col :span="12">
             <div class="grid-content bg-purple-dark">
@@ -37,6 +37,16 @@
         </el-row>
       </div>
     </transition>
+
+    <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
+    <el-dialog title="提示" v-model="dialogVisible" size="tiny">
+      <span>这是一段信息</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -44,12 +54,14 @@
   export default {
     name: 'map',
     data () {
+      console.log(this.$el)
       let {mapPage} = this.$store.state
       return {
         msg: 'This page is map page',
         inputData: mapPage.inputData,
         isOk: mapPage.isOk,
         commentCount: mapPage.formData.commentCount,
+        dialogVisible: false,
         keyboardEnterValue: '',
         showKeyboard: false,
         keyboardType: 'char'
