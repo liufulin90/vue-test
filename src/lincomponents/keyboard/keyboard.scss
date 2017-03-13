@@ -1,0 +1,83 @@
+@import '../css/base';
+
+$keyboardBg: #cccccc; // 整个键盘背景颜色
+$specialKeyBg: #a3b5be; // 特殊键的背景颜色
+$borderRadius: .3em; // 圆角大小
+
+/** ul 和 li的初始换样式 */
+.kb-list-ulli {
+  list-style: none;
+  font-size: 14px;
+}
+/** 键盘的基本样式 */
+.kb-char-item-key {
+  min-width: 1em;
+  height: 2.5em;
+  padding: 0 .5em;
+  display: inline-block;
+  line-height: 2.5em;
+  text-align: center;
+  background-color: #ffffff;
+  margin: 5px;
+  border-radius: $borderRadius;
+}
+/** 键盘被按下时的样式 */
+.kb-key-active {
+  background-color: #5e7382;
+  color: #ffffff;
+}
+
+.kb-char-wrap {
+  padding: .5em;
+  display: inline-flex;
+  border-radius: $borderRadius;
+  background-color: $keyboardBg;
+  @include autoPrefix(user-select, none);
+  ul {
+    @extend .kb-list-ulli;
+    li {
+      @extend .kb-list-ulli;
+      display: flex;
+      flex-flow: row;
+      justify-content: center;
+      &.kb-char-item {
+        span {
+          @extend .kb-char-item-key;
+          &.blank {
+            @extend .kb-char-item-key;
+            background: none;
+          }
+          &:active {
+            @extend .kb-key-active;
+          }
+          &.kb-char-disabled{
+            color: #888;
+          }
+          &.kb-char-disabled{
+            &:active {
+              background-color: $specialKeyBg;
+            }
+          }
+        }
+        b {
+          @extend .kb-char-item-key;
+          &.kb-char-active {
+            @extend .kb-key-active;
+          }
+        }
+        .kb-char-space{
+          width: 10em;
+        }
+        .kb-char-large{
+          width: 3.5em;
+          background-color: $specialKeyBg;
+        }
+        .kb-char-middle{
+          width: 2.4em;
+          background-color: $specialKeyBg
+        }
+      }
+    }
+  }
+}
+

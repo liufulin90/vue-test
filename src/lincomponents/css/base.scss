@@ -1,0 +1,5 @@
+@mixin autoPrefix ($prop, $value) {
+	-webkit-#{$prop}: $value;
+	-moz-#{$prop}: $value;
+	-ms-#{$prop}: $value
+}

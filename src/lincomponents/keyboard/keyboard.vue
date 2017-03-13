@@ -76,6 +76,7 @@
 </template>
 
 <script>
+  import './keyboard.scss'
   import {defaultProps} from '../utils/'
   export default {
     name: 'lin-keyboard',
@@ -202,63 +203,3 @@
   }
 </script>
 
-<style>
-  .kb-char-wrap{
-    padding: .5em;
-    display: inline-flex;
-    border-radius: .3em;
-    background-color: #cccccc;
-    user-select: none;
-  }
-  .kb-char-wrap ul,
-  .kb-char-wrap ul li{
-    list-style: none;
-    font-size: 14px;
-  }
-  .kb-char-wrap ul li{
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
-  }
-  .kb-char-item span.blank,
-  .kb-char-item span,
-  .kb-char-item b{
-    min-width: 1em;
-    height: 2.5em;
-    padding: 0 .5em;
-    display: inline-block;
-    line-height: 2.5em;
-    text-align: center;
-    background-color: #ffffff;
-    margin: 5px;
-    border-radius: 0.3em;
-  }
-  .kb-char-item span:active,
-  .kb-char-item b.kb-char-active{
-    background-color: #5e7382;
-    color: #ffffff;
-  }
-
-  .kb-char-item span.blank{
-    background: none;
-  }
-  .kb-char-item .kb-char-space{
-    width: 10em;
-  }
-  .kb-char-item .kb-char-large{
-    width: 3.5em;
-    background-color: #a3b5be;
-  }
-  .kb-char-item .kb-char-middle{
-    width: 2.4em;
-    background-color: #a3b5be;
-  }
-  .kb-char-item span.kb-char-disabled{
-    color: #888;
-  }
-
-  .kb-char-item span.kb-char-disabled:active{
-    background-color: #a3b5be;
-  }
-
-</style>

@@ -12,6 +12,7 @@ import LinComponent from './lincomponents/'
 Vue.use(LinComponent)
 
 /* eslint-disable no-new */
+Vue.config.silent = false // true取消 Vue 所有的日志与警告。
 Vue.use(ElementUI)
 new Vue({
   el: '#app',
