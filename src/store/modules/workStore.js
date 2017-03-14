@@ -24,7 +24,6 @@ export default {
   },
   mutations: {
     [types.GET_WORK_LIST_MUTATION] (state, payload) {
-      console.log('@@', state, payload)
       state.workList = payload
     },
     [types.GET_PROJECT_LIST_MUTATION] (state, payload) {

@@ -51,7 +51,6 @@
       let {workList, projectList} = this.$store.state.workPage
       this.workList = workList
       this.projectList = projectList
-      console.log(workList)
     },
     data () {
       let {isListShow, workList, projectList} = this.$store.state.workPage
