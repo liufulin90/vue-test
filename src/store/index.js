@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import _actions from './actions'
 import _mutations from './mutations'
+import _workModule from './modules/workStore'
 import {myPlugin} from './plugins'
 Vue.use(Vuex)
 
@@ -12,11 +13,6 @@ const store = new Vuex.Store({
     count: 1,
     menu: {
       defaultActive: 1
-    },
-    workPage: {
-      workList: [],
-      projectList: [],
-      isListShow: false
     },
     mapPage: {
       isOk: true,
@@ -34,6 +30,7 @@ const store = new Vuex.Store({
   },
   modules: {
     // key: {}
+    workPage: _workModule
   },
   getters: {
     // state,     // 如果在模块中定义则为模块的局部状态

@@ -34,20 +34,24 @@
 </template>
 
 <script>
-  import WorkService from 'services/WorkService'
+//  import {GET_WORK_LIST_ACTION, GET_PROJECT_LIST_ACTION} from 'store/modules/workStore'
+  import * as types from 'store/modules/types'
   export default {
     name: 'work',
     beforeCreate () {
+      this.$store.dispatch(types.GET_WORK_LIST_ACTION)
+      this.$store.dispatch(types.GET_PROJECT_LIST_ACTION)
     },
     beforeMount () {
-      WorkService.getWorkExperience().then(data => {
-        this.workList = data.data
-      })
-      WorkService.getProjectExperience().then(data => {
-        this.projectList = data.data
-      })
+    },
+    mounted () {
+      this.$forceUpdate()
     },
     beforeUpdate () {
+      let {workList, projectList} = this.$store.state.workPage
+      this.workList = workList
+      this.projectList = projectList
+      console.log(workList)
     },
     data () {
       let {isListShow, workList, projectList} = this.$store.state.workPage
