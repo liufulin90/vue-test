@@ -4,6 +4,8 @@ import Vue from 'vue'
 import _actions from './actions'
 import _mutations from './mutations'
 import _workModule from './modules/workStore'
+import _global from './globalStore'
+import user from './userStore'
 import {myPlugin} from './plugins'
 Vue.use(Vuex)
 
@@ -30,7 +32,9 @@ const store = new Vuex.Store({
   },
   modules: {
     // key: {}
-    workPage: _workModule
+    workPage: _workModule,
+    user,
+    _global
   },
   getters: {
     // state,     // 如果在模块中定义则为模块的局部状态
