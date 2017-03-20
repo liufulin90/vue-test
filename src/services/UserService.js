@@ -8,7 +8,7 @@ class UserService {
   }
 
   logout () {
-    let url = apiUrlConfig().getUser
+    let url = apiUrlConfig().logout
     return Ajax({url: url, method: 'GET'})// .then(response => response.json())
   }
 }

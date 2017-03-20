@@ -28,17 +28,17 @@ router.beforeEach(({meta, path}, from, next) => {
   var { auth = true } = meta
   var isLogin = store.state.user && Boolean(store.state.user.id) // true用户已登录， false用户未登录
 
-  console.log('check', auth && !isLogin && path !== '/login')
   if (auth && !isLogin && path !== '/login') {
     return next({ path: '/login' })
   }
-  console.log('path', path)
   if (path === '/') {
     return next({path: '/index'})
   }
   next()
 })
-
+// setInterval(() => {
+//   console.log('@@@@', store.state.ownMenus)
+// }, 2000)
 import App from './App'
 new Vue({
   el: '#app',

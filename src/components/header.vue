@@ -1,7 +1,16 @@
 <template>
   <div class="row">
     <el-menu theme="dark" default-active={defaultActive} class="el-menu-demo" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="1">
+      <div v-for="item in this.$store.state.ownMenus">
+        <el-submenu :index="item.key" v-if="item.children">
+          <template slot="title">{{item.name}}</template>
+          <el-menu-item :index="sub.key" v-for="sub in item.children">{{sub.name}}</el-menu-item>
+        </el-submenu>
+        <el-menu-item :index="item.key" v-else>
+          <router-link :to="item.path">{{item.name}}</router-link>
+        </el-menu-item>
+      </div>
+      <!--<el-menu-item index="1">
         <router-link to="/index">Home</router-link>
       </el-menu-item>
       <el-menu-item index="2">
@@ -20,6 +29,7 @@
         <el-menu-item index="5-1">选项1</el-menu-item>
         <el-menu-item index="5-2">选项2</el-menu-item>
       </el-submenu>
+      -->
       <div class="signout">
         <a @click="signout">退出</a>
       </div>
@@ -46,7 +56,21 @@
   import { mapActions } from 'vuex'
   import { USER_SIGNOUT } from '../store/userStore'
   import {CHANGE_PENDING} from 'store/globalStore'
+  import * as jst from 'js-common-tools'
   export default {
+    mounted () {
+      const {user, _global} = this.$store.state
+      const ownMenus = _global.menus.filter((item) => {
+        return jst.inArray(item.key, user.power)
+      })
+      Object.assign(this.$store.state, {ownMenus: ownMenus})
+
+      console.log(this.$store.state)
+      this.$forceUpdate()
+    },
+    beaforeUpdate () {
+      console.log('header update beafore')
+    },
     data () {
       return {
         theme1: 'dark',

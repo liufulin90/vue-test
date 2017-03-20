@@ -7,8 +7,9 @@ export const USER_SIGNOUT = 'USER_SIGNOUT' // 退出
 export default {
   state: JSON.parse(sessionStorage.getItem('user')) || {},
   mutations: {
-    [USER_SIGNIN] (state, payload) {
+    [USER_SIGNIN] (state, {rState, payload}) {
       sessionStorage.setItem('user', JSON.stringify(payload))
+      console.log('...', rState)
       Object.assign(state, payload)
     },
     [USER_SIGNOUT] (state) {
@@ -20,8 +21,11 @@ export default {
     }
   },
   actions: {
-    [USER_SIGNIN] ({commit}, payload) {
-      commit(USER_SIGNIN, payload)
+    [USER_SIGNIN] ({commit, rootState}, payload) {
+      return UserService.login().then((res) => {
+        console.log('login commit payload res', rootState, payload, res)
+        commit(USER_SIGNIN, {rState: rootState, payload: res.data})
+      })
     },
     [USER_SIGNOUT] ({commit}) {
       console.log('正在退出')
