@@ -46,13 +46,17 @@
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
-
+    <qrcode val="http://www.baidu.com" size="200" fg-color="green"></qrcode>
   </div>
 </template>
 
 <script>
+  import {Qrcode} from 'v-weui'
   export default {
     name: 'map',
+    components: {
+      Qrcode
+    },
     data () {
       console.log(this.$el)
       let {mapPage} = this.$store.state
